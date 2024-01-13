@@ -1,28 +1,28 @@
 import java.util.ArrayList;
+import java.util.Collections;
 //this class is used to represent the word people are trying to solve.
 
 public class WordleObject {
-    private String[] letters;  //size 5
-    private ArrayList<String> alphabetsNotUsedYet; //everytime a user guesses a letter, take out a letter
-    private ArrayList<String> alphabetsGreen;
-    private ArrayList<String> alphabetsYellow;
-    private ArrayList<String> alphabetsGray;
+    private final String[] letters;  //size 5
+    private final ArrayList<String> alphabetsNotUsedYet; //everytime a user guesses a letter, take out a letter
+    private final ArrayList<String> alphabetsGreen;
+    private final ArrayList<String> alphabetsYellow;
+    private final ArrayList<String> alphabetsGray;
 
     public WordleObject(String[] letters)
     {
         this.letters = letters; // this contains the golden word that we need to guess
-        alphabetsNotUsedYet = new ArrayList<String>();
-        alphabetsGreen = new ArrayList<String >();
+        alphabetsNotUsedYet = new ArrayList<>();
+        alphabetsGreen = new ArrayList< >();
         for (int i = 0; i < 5; i++) {
             alphabetsGreen.add(i, "0");
         }
-        alphabetsYellow = new ArrayList<String>();
-        alphabetsGray = new ArrayList<String>();
+        alphabetsYellow = new ArrayList<>();
+        alphabetsGray = new ArrayList<>();
         String[] x = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w"
                 , "x", "y", "z",};
-        for (String temp : x) {
-            alphabetsNotUsedYet.add(temp);
-        }
+
+        Collections.addAll(alphabetsNotUsedYet, x);
     }
 
     public boolean checkWord(String guess){
@@ -35,9 +35,7 @@ public class WordleObject {
                 System.out.print(c + " is green at " + i + "     ");
                 greenCount++;
                 alphabetsGreen.add(i, c);
-                if(alphabetsYellow.contains(c)){
-                    alphabetsYellow.remove(c);
-                }
+                alphabetsYellow.remove(c);
             } else if(isLetterInTheWord(c)){
                 System.out.print(c + " is yellow at " + i + "     ");
                 if(!alphabetsYellow.contains(c)) {
@@ -63,7 +61,7 @@ public class WordleObject {
         String value = "";
         for (int i = 0; i < 5; i++) {
             String letter = listOfStrings.get(i);
-            if (letter != "0") {
+            if (!"0".equals(letter)) {
                 value = value + i + ":" + letter + ",";
             }
         }

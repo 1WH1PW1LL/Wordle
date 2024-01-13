@@ -35,11 +35,11 @@ public class WordleApp {
 
     private static void guessTheWord(ArrayList<String> allLegalWords, WordleObject wordleObject) {
         int keepGoing = 0;
-        boolean continueFlg = false;
+        boolean continueFlg;
         Scanner keyboard = new Scanner(System.in);
         do {
             String guess = keyboard.nextLine();
-            if(null == guess || guess.length() == 0 || guess.length() != 5 ){
+            if(null == guess || guess.length() != 5 ){
                 System.out.println("You need to enter a 5 letter word before hitting enter");
                 continueFlg = false;
                 continue;
@@ -57,7 +57,7 @@ public class WordleApp {
                 // an invalid word does not count towards the 6 tries
                 continueFlg = false;
             }
-        }while(continueFlg == false && keepGoing < 6);
+        }while(!continueFlg && keepGoing < 6);
     }
 
     private static void printUserInformation() {
@@ -68,13 +68,11 @@ public class WordleApp {
     private static String getWordToGuess(ArrayList<String> allWords) {
         int numberOfFiveLetterWords = allWords.size();
         int randomIndexToGrabWordFromAllFiveLetterWordsArray = (int) (Math.random()*numberOfFiveLetterWords);
-        String goldenWord = allWords.get(randomIndexToGrabWordFromAllFiveLetterWordsArray);
-//        System.out.println(goldenWord);
-        return goldenWord;
+        return  allWords.get(randomIndexToGrabWordFromAllFiveLetterWordsArray);
     }
 
     private static ArrayList<String> loadWordList() {
-        ArrayList<String> allWords = new ArrayList<String>();
+        ArrayList<String> allWords = new ArrayList<>();
         try {
             File myObj = new File("C:\\Users\\timpa\\MyDrive\\msj-school-work\\g11\\CSA\\Wordle\\src\\wordle.txt");
 //            File myObj = new File("C:/Users/timpa/MyDrive/msj-school-work/g11/CSA/Wordle/src/wordle.txt");
